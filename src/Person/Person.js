@@ -1,6 +1,6 @@
 import React from 'react';
 import './Person.css';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 
 const person = (props) => {
 
