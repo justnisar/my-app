@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons.js';
 import Cockpit from '../components/Cockpit/Cockpit';
+import withClass from '../hoc/withClass';
+import Aux from '../hoc/Aux';
+
 class App extends Component {
 
   constructor(props) {
@@ -26,7 +29,8 @@ class App extends Component {
         }
       ],
       showPersons : false,
-      showCockpit : true
+      showCockpit : true,
+      changeCounter : 0
     }
   }
 
@@ -87,7 +91,8 @@ class App extends Component {
     persons[personIndex] = person;
 
     this.setState({
-      persons : persons
+      persons : persons,
+      changeCounter : this.changeCounter + 1
     });
 
   }
@@ -136,8 +141,8 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
-      <button onClick={() => {this.setState({showCockpit:false})}}> click </button>
+      <Aux>
+      <button onClick={() => {this.setState({showCockpit:false})}}> Remove Cockpit </button>
       {this.state.showCockpit ?
       <Cockpit
         title={this.props.appTitle}
@@ -146,9 +151,9 @@ class App extends Component {
         toggle={this.togglePersonshandler}
       /> : null }
        {persons}
-      </div>
+      </Aux>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
